@@ -40,19 +40,20 @@ export function Nav() {
           <img src="/majid-logo.svg" alt="Majid Developments" className="h-9 w-auto" />
         </a>
 
-        <nav className="hidden items-center gap-10 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="link-underline text-[13px] font-normal tracking-[0.08em] text-ink-soft uppercase transition-colors duration-200 hover:text-ink"
+              className="group relative font-display text-[15px] font-light text-ink-soft transition-colors duration-300 hover:text-ink"
             >
               {l.label}
+              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-champagne/60 transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
           <a
             href="#register"
-            className="btn border border-champagne/60 px-6 py-2.5 text-[13px] tracking-[0.08em] text-champagne-soft uppercase hover:bg-champagne hover:text-night-deep"
+            className="btn border border-champagne/60 px-6 py-2.5 font-display text-[14px] font-light text-champagne-soft transition-all duration-300 hover:bg-champagne hover:text-night-deep"
           >
             Register Interest
           </a>
