@@ -45,7 +45,7 @@ export function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="group relative font-display text-[15px] font-light text-ink-soft transition-colors duration-300 hover:text-ink"
+              className="group relative font-display text-[18px] font-light text-ink-soft transition-colors duration-300 hover:text-ink"
             >
               {l.label}
               <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-champagne/60 transition-all duration-300 group-hover:w-full" />
@@ -53,7 +53,7 @@ export function Nav() {
           ))}
           <a
             href="#register"
-            className="btn border border-champagne/60 px-6 py-2.5 font-display text-[14px] font-light text-champagne-soft transition-all duration-300 hover:bg-champagne hover:text-night-deep"
+            className="btn border border-champagne/60 px-6 py-2.5 font-display text-[18px] font-light text-champagne-soft transition-all duration-300 hover:bg-champagne hover:text-night-deep"
           >
             Register Interest
           </a>
