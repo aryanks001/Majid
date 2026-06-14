@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { MaskedLine } from './Masked'
 
 const projects = [
@@ -6,21 +7,21 @@ const projects = [
     name: 'Arlington Park II',
     location: 'Dubailand',
     line: '129 residences from studios to three bedrooms, now open for registration.',
-    href: '#arlington-park-ii',
+    href: '/projects/arlington-park-ii',
     image: '/images/arlington-night.jpg',
   },
   {
     name: 'Arlington Park',
     location: 'Dubailand',
     line: 'The community that started it all, minutes from the coming Blue Line Metro.',
-    href: '#register',
+    href: '/projects/arlington-park',
     image: '/images/arlington-entrance.jpg',
   },
   {
     name: 'Mayfair Gardens',
     location: 'Jumeirah Garden City',
     line: 'City-centre living served by the planned Gold Line Metro.',
-    href: '#register',
+    href: '/projects/mayfair-gardens',
     image: '/images/tower-sunset.png',
   },
 ]
@@ -39,8 +40,8 @@ export function Projects() {
             <ul className="mt-12">
               {projects.map((p, i) => (
                 <li key={p.name} className="border-t border-hairline last:border-b">
-                  <a
-                    href={p.href}
+                  <Link
+                    to={p.href}
                     onMouseEnter={() => setActive(i)}
                     onFocus={() => setActive(i)}
                     className="group block py-8"
@@ -56,7 +57,7 @@ export function Projects() {
                     <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-ink-soft">
                       {p.line}
                     </p>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

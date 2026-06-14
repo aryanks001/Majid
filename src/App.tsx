@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'motion/react'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
@@ -16,8 +17,9 @@ import { Grain } from './components/Grain'
 import { Preloader } from './components/Preloader'
 import { SmoothScroll } from './components/SmoothScroll'
 import { Stats } from './components/Stats'
+import { ProjectPage } from './pages/ProjectPage'
 
-function App() {
+function HomePage() {
   const [introDone, setIntroDone] = useState(false)
 
   return (
@@ -43,6 +45,15 @@ function App() {
       </main>
       <Footer />
     </>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/projects/:slug" element={<ProjectPage />} />
+    </Routes>
   )
 }
 
