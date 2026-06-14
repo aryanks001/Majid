@@ -113,7 +113,7 @@ export function ProjectPage() {
                   </Reveal>
                 ))}
                 <Reveal delay={0.2}>
-                  <div className="mt-10 flex flex-wrap gap-x-10 gap-y-5">
+                  <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-5">
                     <Magnetic>
                       <Link
                         to="/#register"
