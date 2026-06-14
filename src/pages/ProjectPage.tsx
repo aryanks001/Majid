@@ -7,19 +7,50 @@ import { Reveal } from '../components/Reveal'
 import { Magnetic } from '../components/Magnetic'
 import { MaskImage } from '../components/MaskImage'
 
-function HeroScene({ src, name }: { src: string; name: string }) {
+type HeroSceneProps = {
+  src: string
+  name: string
+  location: string
+  district: string
+  tagline: string
+}
+
+function HeroScene({ src, name, location, district, tagline }: HeroSceneProps) {
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '14%'])
+  const words = name.split(' ')
 
   return (
     <div ref={ref} className="relative h-[88vh] overflow-hidden lg:h-[105vh]">
       <motion.div className="absolute -inset-y-[10%] inset-x-0" style={reduce ? undefined : { y }}>
         <img src={src} alt={name} className="h-full w-full object-cover" />
       </motion.div>
-      <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-night-deep via-night-deep/50 to-transparent" />
+      {/* Gradients */}
+      <div className="absolute inset-x-0 bottom-0 h-4/5 bg-gradient-to-t from-night-deep via-night-deep/60 to-transparent" />
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-night-deep/60 to-transparent" />
+
+      {/* Hero text overlay — bottom left */}
+      <div className="absolute inset-x-0 bottom-0 px-6 pb-12 lg:px-12 lg:pb-16">
+        <p className="text-[11px] tracking-[0.2em] text-champagne uppercase mb-5">
+          {location} &middot; {district}
+        </p>
+        <h1 className="font-display text-[3.2rem] leading-[1.02] font-light tracking-[-0.01em] md:text-7xl lg:text-[5.5rem]">
+          {words.map((word, i) => (
+            <MaskedLine key={i} delay={i * 0.13}>
+              <span className={i === words.length - 1 ? 'text-metallic-gold' : 'text-metallic'}>
+                {word}
+              </span>
+            </MaskedLine>
+          ))}
+        </h1>
+        <MaskedLine delay={words.length * 0.13 + 0.08}>
+          <em className="mt-4 block font-display text-lg font-light text-ink-soft lg:text-xl">
+            {tagline}
+          </em>
+        </MaskedLine>
+      </div>
     </div>
   )
 }
@@ -61,30 +92,13 @@ export function ProjectPage() {
 
       <main className="pt-[72px]">
         {/* Hero */}
-        <HeroScene src={project.hero} name={project.name} />
-
-        {/* Title block */}
-        <div className="mx-auto max-w-[1400px] px-6 pt-16 pb-4 lg:px-12 lg:pt-24">
-          <Reveal>
-            <p className="text-[12px] tracking-[0.18em] text-champagne uppercase">
-              {project.location} &middot; {project.district}
-            </p>
-          </Reveal>
-          <h1 className="mt-4 font-display text-[3rem] leading-[1.02] font-light md:text-7xl lg:text-[6rem]">
-            {project.name.split(' ').map((word, i, arr) => (
-              <MaskedLine key={i} delay={i * 0.12}>
-                <span className={i === arr.length - 1 ? 'text-metallic-gold' : 'text-metallic'}>
-                  {word}{i < arr.length - 1 ? '' : ''}
-                </span>
-              </MaskedLine>
-            ))}
-          </h1>
-          <Reveal delay={0.3}>
-            <p className="mt-6 max-w-[52ch] text-xl font-display font-light italic text-ink-soft">
-              {project.tagline}
-            </p>
-          </Reveal>
-        </div>
+        <HeroScene
+          src={project.hero}
+          name={project.name}
+          location={project.location}
+          district={project.district}
+          tagline={project.tagline}
+        />
 
         {/* Description + Stats */}
         <div className="border-t border-hairline mt-16">
