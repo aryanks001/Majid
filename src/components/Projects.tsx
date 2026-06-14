@@ -8,14 +8,14 @@ const projects = [
     location: 'Dubailand',
     line: '129 residences from studios to three bedrooms, now open for registration.',
     href: '/projects/arlington-park-ii',
-    image: '/images/arlington-night.jpg',
+    image: '/images/arlington-entrance.jpg',
   },
   {
     name: 'Arlington Park',
     location: 'Dubailand',
     line: 'The community that started it all, minutes from the coming Blue Line Metro.',
     href: '/projects/arlington-park',
-    image: '/images/arlington-entrance.jpg',
+    image: '/images/arlington_img1.jpg',
   },
   {
     name: 'Mayfair Gardens',
