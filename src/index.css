@@ -1,0 +1,318 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #efebe7;
+  --color-ink-soft: #cac5be;
+  --color-ink-mute: #9c968e;
+  --color-night: #101114;
+  --color-night-raised: #16181c;
+  --color-night-deep: #0b0c0e;
+  --color-champagne: #c9a86a;
+  --color-champagne-soft: #ddc498;
+  --color-hairline: rgba(239, 235, 231, 0.14);
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Satoshi", "Helvetica Neue", Arial, sans-serif;
+
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Lenis drives in-page scrolling; reduced-motion users get instant jumps. */
+html {
+  scrollbar-color: #2b2d33 var(--color-night);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-night);
+}
+::-webkit-scrollbar-thumb {
+  background: #2b2d33;
+  border: 3px solid var(--color-night);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3d45;
+}
+
+body {
+  background-color: var(--color-night);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-champagne);
+  color: var(--color-night-deep);
+}
+
+.btn {
+  transition:
+    transform 160ms var(--ease-out-strong),
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Primary CTA: quiet glass at rest, champagne rises on hover */
+.cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(201, 168, 106, 0.5);
+  background: rgba(16, 17, 20, 0.35);
+  backdrop-filter: blur(6px);
+  color: var(--color-ink);
+  transition:
+    transform 160ms var(--ease-out-strong),
+    color 320ms ease,
+    border-color 320ms ease;
+}
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-champagne);
+  transform: translateY(102%);
+  transition: transform 450ms var(--ease-out-strong);
+}
+.cta:hover,
+.cta:focus-visible {
+  color: var(--color-night-deep);
+  border-color: var(--color-champagne);
+}
+.cta:hover::before,
+.cta:focus-visible::before {
+  transform: translateY(0);
+}
+.cta:active {
+  transform: scale(0.97);
+}
+
+/* The living dusk sky — three depth pools + structural grid */
+.atmo-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  will-change: transform;
+}
+/* Warm champagne: top-right, suggests window light at height */
+.atmo-blob-a {
+  width: 72vw;
+  height: 72vw;
+  top: -28vw;
+  right: -16vw;
+  background: radial-gradient(circle, rgba(201, 168, 106, 0.11), transparent 60%);
+}
+/* Cool blue-indigo: bottom-left, depth + contrast */
+.atmo-blob-b {
+  width: 65vw;
+  height: 65vw;
+  bottom: -26vw;
+  left: -18vw;
+  background: radial-gradient(circle, rgba(72, 92, 148, 0.10), transparent 60%);
+}
+/* Soft centre warmth: ties both pools together, anchors the eye */
+.atmo-blob-c {
+  width: 50vw;
+  height: 50vw;
+  top: 30vh;
+  left: 25vw;
+  background: radial-gradient(circle, rgba(201, 168, 106, 0.045), transparent 65%);
+}
+/* Barely-visible architectural grid — 1px lines at very low opacity */
+.atmo-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(239, 235, 231, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 235, 231, 0.018) 1px, transparent 1px);
+  background-size: 90px 90px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .atmo-blob-a {
+    animation: atmo-drift-a 80s ease-in-out infinite alternate;
+  }
+  .atmo-blob-b {
+    animation: atmo-drift-b 95s ease-in-out infinite alternate;
+  }
+  .atmo-blob-c {
+    animation: atmo-drift-c 60s ease-in-out infinite alternate;
+  }
+}
+@keyframes atmo-drift-a {
+  to { transform: translate(-12vw, 10vh); }
+}
+@keyframes atmo-drift-b {
+  to { transform: translate(10vw, -8vh); }
+}
+@keyframes atmo-drift-c {
+  to { transform: translate(6vw, 8vh); }
+}
+
+/* Hero image: one slow settle on load, skipped under reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-image {
+    animation: hero-settle 2.6s var(--ease-out-strong) both;
+  }
+}
+
+@keyframes hero-settle {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Gallery scroll strip (mobile) */
+.gallery-strip {
+  scrollbar-width: none;
+}
+.gallery-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Premium metallic text — polished silver with a slow travelling light */
+.text-metallic {
+  background-image: linear-gradient(
+    105deg,
+    #7a7670 0%,
+    #c8c3bc 18%,
+    #f0ece8 34%,
+    #ffffff 50%,
+    #f0ece8 66%,
+    #c8c3bc 82%,
+    #7a7670 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+/* Gold-metallic variant for champagne italic accents */
+.text-metallic-gold {
+  background-image: linear-gradient(
+    105deg,
+    #7a5a20 0%,
+    #c9a86a 22%,
+    #f0d080 40%,
+    #fff3c0 50%,
+    #f0d080 60%,
+    #c9a86a 78%,
+    #7a5a20 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .text-metallic {
+    animation: metallic-sheen 7s ease-in-out infinite alternate;
+  }
+  .text-metallic-gold {
+    animation: metallic-sheen 7s ease-in-out infinite alternate;
+  }
+}
+@keyframes metallic-sheen {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Animated underline for nav and text links */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 450ms var(--ease-out-strong);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Outlined display type for the marquee */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(239, 235, 231, 0.32);
+  color: transparent;
+}
+
+/* Kinetic marquee: two identical tracks, second one takes over seamlessly */
+.marquee-inner {
+  display: flex;
+  width: max-content;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-inner {
+    animation: marquee 38s linear infinite;
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Soft pools of warm light behind dark sections */
+.light-pool {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    55% 45% at 72% 12%,
+    rgba(201, 168, 106, 0.07),
+    transparent 70%
+  );
+}
+.light-pool-low {
+  background: radial-gradient(
+    50% 45% at 18% 85%,
+    rgba(201, 168, 106, 0.06),
+    transparent 70%
+  );
+}
+
+/* Slow editorial zoom on framed images */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 1.4s var(--ease-out-strong);
+}
+@media (hover: hover) and (pointer: fine) {
+  .img-zoom:hover img {
+    transform: scale(1.045);
+  }
+}
