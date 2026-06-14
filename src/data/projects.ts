@@ -54,6 +54,11 @@ export const projects: Project[] = [
     ],
     hero: '/images/arlington-entrance.jpg',
     gallery: [
+      { src: '/images/arlington-night.jpg', alt: 'Arlington Park II illuminated at night' },
+      { src: '/images/bedroom-skyline.jpg', alt: 'Primary bedroom with floor-to-ceiling skyline views' },
+      { src: '/images/lobby-chandelier.jpg', alt: 'Grand lobby with statement chandelier' },
+      { src: '/images/lobby-green.jpg', alt: 'Lobby reception in sage velvet and travertine' },
+      { src: '/images/bathroom-marble.jpg', alt: 'Book-matched marble bathroom with gold fittings' },
       { src: '/images/residents-lounge.jpg', alt: 'Residents lounge with indoor olive trees' },
       { src: '/images/terrace-dining.jpg', alt: 'Terrace dining beneath an olive tree' },
       { src: '/images/garden-lounge.jpg', alt: 'Garden lounge and outdoor seating' },
