@@ -22,7 +22,7 @@ const projects = [
     location: 'Jumeirah Garden City',
     line: 'City-centre living served by the planned Gold Line Metro.',
     href: '/projects/mayfair-gardens',
-    image: '/images/tower-sunset.png',
+    image: '/images/mayfair_banner.jpg',
   },
 ]
 
